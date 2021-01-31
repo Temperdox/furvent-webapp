@@ -3,6 +3,7 @@
 .settings
 .project
 .classpath
+env_variables.yml
 
 *.iml
 .DS_Store

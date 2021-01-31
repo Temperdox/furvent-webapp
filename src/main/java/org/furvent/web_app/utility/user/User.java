@@ -1,4 +1,4 @@
-package org.furvent.web_app.user;
+package org.furvent.web_app.utility.user;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

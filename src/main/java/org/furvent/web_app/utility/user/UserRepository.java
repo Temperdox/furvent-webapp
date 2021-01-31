@@ -1,4 +1,4 @@
-package org.furvent.web_app.user;
+package org.furvent.web_app.utility.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
