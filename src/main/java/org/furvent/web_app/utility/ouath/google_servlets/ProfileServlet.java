@@ -31,7 +31,7 @@ public class ProfileServlet extends HttpServlet {
       response.getWriter().println("<p>Last name: " + userInfo.getFamilyName() + "</p>");
       response.getWriter().println("<p>Full name: " + userInfo.getName() + "</p>");
       response.getWriter().println("<img src=\"" + userInfo.getPicture() + "\" />");
-      
+
       response.getWriter().println("<p><a href=\"/logout\">Logout</a></p>");
     } else {
       response.getWriter().println("<a href=\"/login\">Login with Google</a>");	
