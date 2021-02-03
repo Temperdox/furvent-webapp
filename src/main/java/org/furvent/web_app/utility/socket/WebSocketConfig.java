@@ -8,11 +8,12 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
+    final String serverDomain = System.getenv("SERVER_DOMAIN");
+
     @Override
-    public void registerStompEndpoints(StompEndpointRegistry
-                                               registry) {
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/mywebsockets")
-                .setAllowedOrigins("mydomain.com").withSockJS();
+                .setAllowedOrigins(serverDomain).withSockJS();
     }
 
     @Override

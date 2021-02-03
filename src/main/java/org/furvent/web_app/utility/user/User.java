@@ -1,7 +1,12 @@
 package org.furvent.web_app.utility.user;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+import org.furvent.web_app.utility.widgets.Widget;
+
+import javax.jdo.annotations.Persistent;
+import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -10,21 +15,54 @@ public class User {
     @GeneratedValue
     private Long discriminator;
 
+    @Getter @Setter
     private String userName;
 
+    @Getter @Setter
     private String nickName;
 
+    @Getter @Setter
     private String email;
 
+    @Getter @Setter
     private int level;
 
+    @Getter @Setter
     private int xp;
 
+    @Getter @Setter
     private boolean trusted;
 
+    @Getter @Setter
     private int balance;
 
+    @Getter @Setter
     private int reputation;
+
+    @Getter
+    @OneToMany
+    private Set<User> friends;
+
+    @Getter
+    @OneToMany
+    private Set<User> blocked;
+
+    @Getter
+    @OneToMany
+    private Set<User> muted;
+
+    @Getter
+    @OneToMany
+    private Set<User> deafened;
+
+    @Getter
+    @Transient
+    private Set<Widget> widgets;
+
+    //used for when the user turns another users volume down on VOIP.
+    @Getter
+    @Transient
+    private HashMap<User, Double> volume;
 
     protected User() {
     }
@@ -34,77 +72,71 @@ public class User {
         this.nickName = nickName;
     }
 
-    public Long getDiscriminator() {
-        return discriminator;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((discriminator == null) ? 0 : discriminator.hashCode());
+        return result;
     }
 
-    public String getUserName() {
-        return userName;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User user = (User) obj;
+        if (discriminator == null) {
+            return user.discriminator == null;
+        } else return discriminator.equals(user.discriminator);
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public boolean addFriend(User user){
+        try{
+            friends.add(user);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public String getNickName() {
-        return nickName;
+    public boolean removeFriend(User user){
+        try{
+            friends.remove(user);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public void setLastName(String nickName) {
-        this.nickName = nickName;
+    public boolean block(User user){
+        try{
+            blocked.add(user);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public int getXp() {
-        return xp;
-    }
-
-    public void setXp(int xp) {
-        this.xp = xp;
-    }
-
-    public boolean isTrusted() {
-        return trusted;
-    }
-
-    public void setTrusted(boolean trusted) {
-        this.trusted = trusted;
-    }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getReputation() {
-        return reputation;
-    }
-
-    public void setReputation(int reputation) {
-        this.reputation = reputation;
+    public boolean unblock(User user){
+        try{
+            blocked.remove(user);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("Customer[id=%d, firstName='%s', lastName='%s']", discriminator,
+        return String.format("User[id=%d, firstName='%s', lastName='%s']", discriminator,
                 userName, nickName);
     }
 }
