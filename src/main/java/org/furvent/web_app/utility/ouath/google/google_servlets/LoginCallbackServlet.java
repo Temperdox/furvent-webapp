@@ -1,11 +1,11 @@
-package org.furvent.web_app.utility.ouath.google_servlets;
+package org.furvent.web_app.utility.ouath.google.google_servlets;
 
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.AuthorizationCodeResponseUrl;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.servlet.auth.oauth2.AbstractAuthorizationCodeCallbackServlet;
 import com.google.api.client.http.GenericUrl;
-import org.furvent.web_app.utility.ouath.OAuthUtil;
+import org.furvent.web_app.utility.ouath.google.OAuthUtil;
 
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;

@@ -1,4 +1,4 @@
-package org.furvent.web_app.utility.ouath.google_servlets;
+package org.furvent.web_app.utility.ouath.google.google_servlets;
 
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
