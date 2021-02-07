@@ -2,8 +2,6 @@ package org.furvent.web_app.utility.user;
 import lombok.Getter;
 import lombok.Setter;
 import org.furvent.web_app.utility.widgets.Widget;
-
-import javax.jdo.annotations.Persistent;
 import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Set;
@@ -38,6 +36,9 @@ public class User {
 
     @Getter @Setter
     private int reputation;
+
+    @Getter @Setter
+    private String avatarUrl;
 
     @Getter
     @OneToMany
@@ -136,7 +137,7 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("User[id=%d, firstName='%s', lastName='%s']", discriminator,
-                userName, nickName);
+        return String.format("User[%s#%d (%s)]", userName,
+                discriminator, nickName);
     }
 }
